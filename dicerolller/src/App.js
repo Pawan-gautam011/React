@@ -2,10 +2,10 @@ import './index.css';
 
 function App() {
   return (
-  <div>
-  <img width={300} height={250} src={require('./assets/1.png')} alt="example"></img>
+  <div className='image' >
+  <img src={require('./assets/1.png')} alt="example"></img>
 
-    <button ClassName='buttons'>Roll here</button>
+    <button className='buttons'>Roll here</button>
   </div>
   );
 }
