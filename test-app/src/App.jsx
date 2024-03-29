@@ -1,7 +1,9 @@
-import logo from './logo.svg';
+
 import './App.css';
 import  First from './First';
 import  {Second, Test} from './Second';
+import {Practice, Third} from './Practice';
+import  MyRoute from './MyRoute';
 
 function App() {
   return (
@@ -11,6 +13,9 @@ function App() {
      <First />
      <Second />
      <Test />
+     <Practice />
+     <Third />
+     <MyRoute />
     </div>
   );
 }
