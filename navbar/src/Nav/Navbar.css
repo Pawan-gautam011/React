@@ -1,0 +1,24 @@
+header{
+    background-color: rgba(8, 119, 119, 0.753);
+}
+ .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar ul{
+    display: flex;
+    list-style-type: none;    
+}
+.navbar h1{
+    margin-left: 20px;
+}
+.navbar span{
+    color: rgba(13, 214, 6, 0.938);
+}
+.navbar ul li{
+    margin: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;   
+
+}
