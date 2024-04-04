@@ -1,7 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
-import {Second} from './Second'
-import { Practice } from './Practice'
+import Layouts from './components/Layouts'
+import HomePages from './pages/HomePages'
+import Products from './pages/Products'
+
 
 // as Router Shortcut name
 
@@ -9,11 +11,11 @@ const MyRoute = () => {
   return (
     <Router>
         <Routes>
-
-            <Route path='/' element={<Second/>} />
-            <Route path='/Practice' element={<Practice/>} />
+          <Route path='/' element={<Layouts/>}>
+            <Route index element={<HomePages/>} />
+            <Route path='/' element={<Products/>}/>
+          </Route>
         </Routes>
-    
     </Router>
   )
 }
