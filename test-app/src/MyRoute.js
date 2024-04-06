@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
-import Layouts from './components/Layouts'
+import Layouts from './pages/Layouts'
 import HomePages from './pages/HomePages'
 import Products from './pages/Products'
 
