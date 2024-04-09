@@ -3,6 +3,7 @@ import { BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 import Layouts from './pages/Layouts'
 import HomePages from './pages/HomePages'
 import Products from './pages/Products'
+import Login from './pages/Login'
 
 
 // as Router Shortcut name
@@ -12,8 +13,9 @@ const MyRoute = () => {
     <Router>
         <Routes>
           <Route path='/' element={<Layouts/>}>
-            <Route index element={<HomePages/>} />
+            <Route path='home' element={<HomePages/>}/>
             <Route path='products' element={<Products/>}/>
+            <Route path='login' element={<Login/>}/>
           </Route>
         </Routes>
     </Router>
