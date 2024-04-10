@@ -1,30 +1,29 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Card from './Card'
 
 const CardContainer = () => {
-  
-  const [products,setProducts]= useState([])
+
+  const [products, setProducts] = useState([])
 
   useEffect(() => {
     axios.get(`https://fakestoreapi.com/products`)
-    .then(res=>setProducts(res.data))
-    .catch(err => console.error(err))
-  
+      .then(res => setProducts(res.data))
+      .catch(err => console.error(err))
+
   })
 
   return (
-    <>
-      {products && products.map(item=>(
-        <>
-        <h1>{item.title}</h1>
-        <h2>${item.price}</h2>
-        <h3>{item.description}</h3>
-        
-        </>
-      ))}
+    <div className='container-fluid'>
+      <div className="row row-cols-1 row-cols-md-4 g-4">
+        {products && products.map(item => (
+          <>
+            <Card data={item} />
+          </>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-    </>
-  )
-}
-
-export default CardContainer
+export default CardContainer;
