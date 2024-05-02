@@ -14,9 +14,9 @@ const CardContainer = () => {
 
   })
 
-  const increase = () =>{
-    setLimit(limit+4)
-  }
+  // const increase = () =>{
+  //   setLimit(limit+4)
+  // }
 
   return (
     <div className='container-fluid'>
@@ -29,7 +29,7 @@ const CardContainer = () => {
 
         <div className="d-flex justify-content-center">
         <div className="col-md-4 offset-md-4 my-3">
-          <button className=' btn bg-warning' onClick={increase} >Load more</button>
+          <button className=' btn bg-warning' onClick={()=>setLimit(limit+4)} >Load more</button>
         </div>
         </div>
 
