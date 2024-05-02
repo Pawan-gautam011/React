@@ -27,6 +27,12 @@ const ProductDetails = () => {
                 <h5>${product.price}</h5>
                 <p>{product.description}</p>
                 <p> <smalll>Category:{product.category} </smalll> </p>
+                <p>{product.rating && product.rating.rate}</p>
+
+                <div className="my-3">
+                    <button className='btn btn-warning'>Add to Cart</button>
+                </div>
+
             </div>
 
         </div>
