@@ -2,6 +2,10 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const ProductDetails = () => {
     const [product,setProduct] = useState({})
     const params = useParams()
@@ -13,8 +17,50 @@ const ProductDetails = () => {
         .then(res=>setProduct(res.data))
         .catch(err=>console.log(err))
     },[id])
+
+    //handling add to cart button
+
+    const addToCart = () => {
+        //fetch items from cart
+
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || []
+        const productData = {
+            id: product.id,
+            title: product.title,
+            image: product.image,
+            price: product.price,
+            rating: product.rating,
+            category: product.category,
+            quantity:1
+        }
+
+        //check if item exist in localstorage or not
+
+        const existingItem =cartItems.find(item=>item.id===product.id)
+        
+        if(existingItem) {
+            toast.error('Already added to cart')
+        }
+        else{
+            cartItems.push(productData)
+            localStorage.setItem('cartItems',JSON.stringify(cartItems))
+            toast.success(`${productData.title}is added to cart`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        }
+
+    
+    }
+
   return (
     <>
+    <ToastContainer theme='colored' position='top-center'/>
     
     <div className="container my-5">
 
@@ -30,7 +76,7 @@ const ProductDetails = () => {
                 <p>{product.rating && product.rating.rate}</p>
 
                 <div className="my-3">
-                    <button className='btn btn-warning'>Add to Cart</button>
+                    <button className='btn btn-warning' onClick={addToCart}>Add to Cart</button>
                 </div>
 
             </div>
