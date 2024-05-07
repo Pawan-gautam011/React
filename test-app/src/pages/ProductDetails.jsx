@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from 'react-helmet';
 
 
 const ProductDetails = () => {
@@ -60,6 +61,11 @@ const ProductDetails = () => {
 
   return (
     <>
+    <Helmet>
+        <title>{product.title}</title>
+
+    </Helmet>
+
     <ToastContainer theme='colored' position='top-center'/>
     
     <div className="container my-5">
