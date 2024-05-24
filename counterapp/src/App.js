@@ -1,14 +1,20 @@
 import React,{useState} from "react";
 import style from "./style.css";
+import { IoIosAddCircle } from "react-icons/io";
+import { GrSubtractCircle } from "react-icons/gr";
+import { GrPowerReset } from "react-icons/gr";
+
 
 const App =() =>{
     const[Number,SetNumber] = useState(0);
     return <div>
         <h1>{Number}</h1> <hr></hr>
                 
-        <button onClick={() =>SetNumber(Number + 1)} className="button">Increment</button>
-        <button onClick={() =>SetNumber(Number -1) } className="button">Decrement</button>
-        <button onClick={() =>SetNumber(0)} className="button">Reset</button>
+        <button onClick={() =>SetNumber(Number + 1)} className="button"><IoIosAddCircle />
+    Increment</button>
+        <button onClick={() =>SetNumber(Number - 1) } className="button"><GrSubtractCircle />
+ Decrement</button>
+        <button onClick={() =>SetNumber(0)} className="button"><GrPowerReset />Reset</button>
     </div> 
 }
 

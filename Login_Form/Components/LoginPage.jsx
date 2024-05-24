@@ -1,4 +1,5 @@
 import React from 'react'
+import '../src/assets/index.css'
 
 const LoginPage = () => {
   return (
