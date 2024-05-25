@@ -6,7 +6,7 @@ const Login = () => {
       <div className="h-auto w-90 rounded-3xl border-black p-6 flex flex-col shadow-2xl shadow-black bg-gray-700">
         <div className="w-full">
           <h1 className="text-2xl text-center font-bold mb-4 text-white">Login</h1>
-          <hr className="w-10 mt-2 mx-auto border-t-2 border-black" />
+          <hr className="w-10 mt-2 mx-auto border-t-2 border-blue-500" />
 
           <form className="flex flex-col items-center justify-center mt-5 text-xl space-y-4">
             <div className="w-full">
@@ -29,9 +29,11 @@ const Login = () => {
 
           <h2 className="text-white mt-4 text-center">You donot have an account? <span className="underline cursor-pointer text-white">Register</span></h2>
         
-        <div>
-            <button className="">Login</button>
-        </div>
+          <div className="w-full mt-6">
+              <button className="w-full py-3 text-white bg-blue-500 rounded-md hover:bg-gray-600 focus:outline-none transition duration-300 ease-in-out transform hover:scale-100">
+                Login
+              </button>
+            </div>
 
         </div>
       </div>
