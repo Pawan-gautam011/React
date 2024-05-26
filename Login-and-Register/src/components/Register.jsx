@@ -10,6 +10,8 @@ const Register = () => {
           <hr className="w-10 mx-auto border-t-2 border-blue-500" />
 
           <form className="flex flex-col items-center justify-center mt-5 text-xl space-y-4">
+
+            
             <div className="w-full">
               <label className="text-white">Username</label>
               <br />
@@ -36,8 +38,6 @@ const Register = () => {
               <input type="password" name="password" id="password" placeholder="Confirm Your Password" required className="w-full p-3 outline-none rounded-md mt-1 pr-10" />
               <FaEye className="absolute right-3 top-1/2  text-gray-500 cursor-pointer" />
             </div>
-
-
           </form>
 
           <h2 className="text-white mt-4 text-center">You already have an account? <span className="underline cursor-pointer text-white">Login</span></h2>
@@ -52,7 +52,5 @@ const Register = () => {
     </div>
   );
 }
-
-
 
 export default Register

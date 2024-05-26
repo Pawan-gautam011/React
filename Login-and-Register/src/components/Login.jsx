@@ -1,8 +1,24 @@
 import { FaEye } from "react-icons/fa";
+import Button from "./componentButton";
+
 
 const Login = () => {
+  // const [name, setName] = React.useState("");
+  // const [email, setEmail] = React.useState("");
+  // const [password, setPassword] = React.useState("");
+
+//   const handleSubmit =(e) =>{
+//     e.preventDefault();
+//     console.log({
+//         "name":name,
+//         "email": email,
+//         "password":password
+
+//     })
+// }
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-800">
+   
+    <div className="flex items-center justify-center  bg-gray-800">
       <div className="h-auto w-90 rounded-3xl border-black p-6 flex flex-col shadow-2xl shadow-black bg-gray-700">
         <div className="w-full">
           <h1 className="text-2xl text-center font-bold mb-4 text-white">Login</h1>
@@ -10,9 +26,9 @@ const Login = () => {
 
           <form className="flex flex-col items-center justify-center mt-5 text-xl space-y-4">
             <div className="w-full">
-              <label className="text-white">Username</label>
+              <label className="text-white" >Username</label>
               <br />
-              <input type="text" placeholder="Enter your Name" required className="w-full p-3 outline-none rounded-md mt-1" />
+              <input value={name} type="text" placeholder="Enter your Name" required className="w-full p-3 outline-none rounded-md mt-1" />
             </div>
 
             <div className="w-full">
@@ -29,15 +45,19 @@ const Login = () => {
 
           <h2 className="text-white mt-4 text-center">You donot have an account? <span className="underline cursor-pointer text-white">Register</span></h2>
         
-          <div className="w-full mt-6">
-              <button className="w-full py-3 text-white bg-blue-500 rounded-md hover:bg-gray-600 focus:outline-none transition duration-300 ease-in-out transform hover:scale-100">
-                Login
-              </button>
-            </div>
+        <Button buttonName="submit" type='submit'  
+        // onClick={
+        //             (e)=>{
+        //                 handleSubmit(e)
+                       
+        //             }
+               // } 
+                />
 
         </div>
       </div>
     </div>
+   
   );
 }
 
