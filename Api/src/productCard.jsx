@@ -57,9 +57,9 @@ const ProductCard = () => {
         } else {
           setProducts([...products, newProduct]);
         }
-        reset(); // reset form fields
-        setFormVisible(false); // hide the form after submission
-        setIsEditMode(false); // reset edit mode
+        reset(); 
+        setFormVisible(false); 
+        setIsEditMode(false);
       });
   };
 
@@ -72,7 +72,7 @@ const ProductCard = () => {
     setIsEditMode(true);
     setFormVisible(true);
 
-    // Pre-fill the form with the product's details
+
     setValue('title', product.title);
     setValue('description', product.description);
     setValue('price', product.price);

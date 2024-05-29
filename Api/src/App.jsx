@@ -1,13 +1,18 @@
-import { useState } from 'react'
-
 import './App.css'
 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProductCard from './productCard.jsx';
+import Registerhook from './Registerhook.jsx'
 function App() {
-
-
   return (
     <>
-    
+    <Router>
+      <Routes>
+
+      <Route path='/' element={<ProductCard/>} />
+        <Route path='/registerhook' element={<Registerhook />} />
+      </Routes>
+    </Router>
     </>
   )
 }
