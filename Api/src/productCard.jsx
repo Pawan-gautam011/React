@@ -1,29 +1,25 @@
-import { useState, useEffect } from "react";
-
-import PropTypes from "prop-types";
-import { useForm } from "react-hook-form";
-import { data } from "autoprefixer";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { CiStar } from "react-icons/ci";
 
 const ProductCard = () => {
+  const { register, handleSubmit, reset, setValue } = useForm();
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const {register, handleSubmit ,reset, } = useForm()
-
-
-
-
+  const [isFormVisible, setFormVisible] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
+    fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(data => setProducts(data));
   }, []);
 
   const loadMore = () => {
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((data) => setProducts([...products, ...data]));
+    fetch('https://fakestoreapi.com/products')
+      .then(response => response.json())
+      .then(data => setProducts([...products, ...data]));
   };
 
   const addToCart = (product) => {
@@ -33,86 +29,94 @@ const ProductCard = () => {
   const viewDetails = (product) => {
     setSelectedProduct(product);
   };
-  const Edit = (product) => {
-    setSelectedProduct(product);
-
-    fetch('https://fakestoreapi.com/products/1',{
-            method:"PUT",
-            body:JSON.stringify(
-                {
-                    title: 'test product',
-                    price: 13.5,
-                    description: 'lorem ipsum set',
-                    image: 'https://i.pravatar.cc',
-                    category: 'electronic'
-                }
-            )
-        })
-            .then(res=>res.json())
-            .then(json=>console.log(json))
-  };
 
   const closeModal = () => {
     setSelectedProduct(null);
+    setFormVisible(false);
+    setIsEditMode(false);
+    reset();
   };
 
-const onSubmit =(data)=>{
-    
-    fetch("https://fakestoreapi.com/products",{
-        method:'POST',
-        body:JSON.stringify(data),
-        headers:{
-            'Content-type': "application/json",
-        }
+  const createProduct = (data) => {
+    const url = isEditMode
+      ? `https://fakestoreapi.com/products/${selectedProduct.id}`
+      : 'https://fakestoreapi.com/products';
+    const method = isEditMode ? 'PUT' : 'POST';
+
+    fetch(url, {
+      method: method,
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      }
     })
+      .then(response => response.json())
+      .then(newProduct => {
+        if (isEditMode) {
+          setProducts(products.map(product => product.id === selectedProduct.id ? newProduct : product));
+        } else {
+          setProducts([...products, newProduct]);
+        }
+        reset(); // reset form fields
+        setFormVisible(false); // hide the form after submission
+        setIsEditMode(false); // reset edit mode
+      });
+  };
 
-    .then(response =>response.json())
-    .then(newProduct =>{
-        setProducts([...products, newProduct]);
-        reset()
+  const toggleFormVisibility = () => {
+    setFormVisible(!isFormVisible);
+  };
 
-    });
-    
+  const handleEdit = (product) => {
+    setSelectedProduct(product);
+    setIsEditMode(true);
+    setFormVisible(true);
 
-};
-
+    // Pre-fill the form with the product's details
+    setValue('title', product.title);
+    setValue('description', product.description);
+    setValue('price', product.price);
+    setValue('category', product.category);
+    setValue('image', product.image);
+  };
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Products</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {products.map((product) => (
+        {products.map(product => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow">
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-48 object-cover mb-4 rounded-lg"
-            />
+            <img src={product.image} alt={product.title} className="w-full h-48 object-cover mb-4 rounded-lg" />
             <h2 className="text-xl font-semibold">{product.title}</h2>
             <p className="text-gray-600 mb-2">{product.description}</p>
             <p className="text-lg font-bold">${product.price}</p>
-            <div className="flex place-content-center">
-
-            <p className="text-sm"> Rating: {product.rating && product.rating.rate }</p>
-            
-             
-            </div>
-
-            <button
+            <p className="text-sm text-gray-500">Category: {product.category}</p>
+            {product.rating && (
+              <div className="text-sm text-gray-500">
+                <p>Rating:</p>
+                <div className="flex items-center">
+                  {Array.from({ length: Math.floor(product.rating.rate) }, (_, i) => (
+                    <CiStar key={i} className="text-yellow-500" />
+                  ))}
+                  <span className="ml-2">({product.rating.count})</span>
+                </div>
+              </div>
+            )}
+            <button 
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2 mr-2"
               onClick={() => addToCart(product)}
             >
               Add to Cart
             </button>
-            <button
+            <button 
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
               onClick={() => viewDetails(product)}
             >
               View Details
             </button>
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-5"
-              onClick={() => Edit(product)}
+            <button 
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-2"
+              onClick={() => handleEdit(product)}
             >
               Edit
             </button>
@@ -120,7 +124,7 @@ const onSubmit =(data)=>{
         ))}
       </div>
       <div className="mt-4 text-center">
-        <button
+        <button 
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={loadMore}
         >
@@ -128,18 +132,83 @@ const onSubmit =(data)=>{
         </button>
       </div>
 
-      {selectedProduct && (
+      <div className="mt-8 text-center">
+        <button 
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          onClick={toggleFormVisibility}
+        >
+          Create New Product
+        </button>
+      </div>
+
+      {isFormVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4">{isEditMode ? 'Edit Product' : 'Create New Product'}</h2>
+            <form onSubmit={handleSubmit(createProduct)} className="grid grid-cols-1 gap-4">
+              <input 
+                type="text" 
+                name="title" 
+                placeholder="Title" 
+                className="border rounded p-2"
+                {...register('title', { required: true })}
+              />
+              <input 
+                type="text" 
+                name="description" 
+                placeholder="Description" 
+                className="border rounded p-2"
+                {...register('description', { required: true })}
+              />
+              <input 
+                type="number" 
+                name="price" 
+                placeholder="Price" 
+                className="border rounded p-2"
+                {...register('price', { required: true })}
+              />
+              <input 
+                type="text" 
+                name="category" 
+                placeholder="Category" 
+                className="border rounded p-2"
+                {...register('category', { required: true })}
+              />
+              <input 
+                type="text" 
+                name="image" 
+                placeholder="Image URL" 
+                className="border rounded p-2"
+                {...register('image', { required: true })}
+              />
+              <div className="flex justify-end">
+                <button 
+                  type="button"
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  {isEditMode ? 'Update Product' : 'Create Product'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {selectedProduct && !isFormVisible && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
             <h2 className="text-2xl font-bold mb-4">{selectedProduct.title}</h2>
-            <img
-              src={selectedProduct.image}
-              alt={selectedProduct.title}
-              className="w-full h-48 object-cover mb-4 rounded-lg"
-            />
+            <img src={selectedProduct.image} alt={selectedProduct.title} className="w-full h-48 object-cover mb-4 rounded-lg" />
             <p className="text-gray-600 mb-4">{selectedProduct.description}</p>
             <p className="text-lg font-bold mb-4">${selectedProduct.price}</p>
-            <button
+            <button 
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               onClick={closeModal}
             >
@@ -148,50 +217,8 @@ const onSubmit =(data)=>{
           </div>
         </div>
       )}
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-
-      <input type="text"  name="title" placeholder="titel" className="border rounded p-2"
-      {...register('title',{ required: true})} />
-
-
-      <input type="text"  name="description" placeholder="Description" className="border rounded p-2"
-      {...register('description',{ required: true})} />
-
-
-
-      <input type="number"  name="price" placeholder="price" className="border rounded p-2"
-      {...register('price',{ required: true})} />
-
-
-      <input type="text"  name="Category" placeholder="category" className="border rounded p-2"
-      {...register('category',{ required: true})} />
-
-      <input type="text"  name="image" placeholder="image" className="border rounded p-2"
-      {...register('image',{ required: true})} />
-
-      
-
-<div className="flex justify-end">
-    <button type="button" onClick={closeModal}>
-      Cancel
-    </button>
-<button type="submit">
-Create Product
-</button>
-</div>
-</form>
     </div>
   );
 };
-
-
-
-
-
-ProductCard.propTypes = {
-  product: PropTypes.string.isRequired,
-};
-
 
 export default ProductCard;
