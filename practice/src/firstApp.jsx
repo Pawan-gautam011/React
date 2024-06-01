@@ -13,7 +13,6 @@ function FirstApp({ name, age }) {
             <div>
                 <button onClick={() => {
                     setmode(mode === 'light' ? "dark" : "light");
-
                 }
                 }
                 >
@@ -22,15 +21,7 @@ function FirstApp({ name, age }) {
 
                 <div>
                     <h1>{counter}</h1>
-                    {counter != 2 && (
-                        <h1>COunter value is 1</h1>
-                    )}
-                    {counter == 2 && (
-                        <h1>COunter value is 2</h1>
-                    )}
-                    {counter == 3 && (
-                        <h1>COunter value is 3</h1>
-                    )}
+                   
 
                     {mode == "dark" ? (
                         <div style={{ "backgroundColor": "black" }}>
@@ -40,8 +31,8 @@ function FirstApp({ name, age }) {
                             </h1>
                         </div>
                     ) :
-                        <div style={{ "backgroundColor": "red" }}>
-                            <h1 style={{ "color": "white" }}>
+                        <div style={{ "backgroundColor": "white" }}>
+                            <h1 style={{ "color": "Black" }}>
                                 Hello world
 
                             </h1>
@@ -62,7 +53,9 @@ function FirstApp({ name, age }) {
 
                 </div>
                 <h1>My details</h1>
-                <p>{name},{age}</p>
+                <p>{name}{age}</p>
                 </div>
         </React.Fragment>
     )}
+
+    export default FirstApp
