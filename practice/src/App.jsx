@@ -6,7 +6,7 @@ function App() {
         <div className="counter">
           <button id="decrease">
             -
-          </button>
+          </button> 
           <div className="count">0</div>
           <button id="increase">
             +
