@@ -9,7 +9,7 @@ function FirstApp({ name, age }) {
     const [mode, setmode] = useState('light')
 
     return (
-        <React.Fragment>
+       
             <div>
                 <button onClick={() => {
                     setmode(mode === 'light' ? "dark" : "light");
@@ -48,14 +48,13 @@ function FirstApp({ name, age }) {
                         onClick={() => setCounter(counter + 1)}
                     >
                         Click me
-
                     </button>
 
                 </div>
                 <h1>My details</h1>
                 <p>{name}{age}</p>
                 </div>
-        </React.Fragment>
+    
     )}
 
     export default FirstApp
