@@ -2,20 +2,23 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(3); 
+  const [count, setCount] = useState(10); 
   const name = "ey";
 
 
   const incrementCount = () => {
+    if(count < 20){
     setCount(count + 1);
+    }
   };
 
-  if(count === 3){
-    console.log("Heloo")
-  }
+
   const decrementCount = () => {
+    if(count > 0){
     setCount(count - 1);
+    }
   };
+
 
   return (
     <>
