@@ -5,6 +5,8 @@ import Registerhook from './Registerhook.jsx'
 import ProductComponent from './productComponent.jsx';
 
 
+
+
 function App() {
   return (
     <>
@@ -13,7 +15,8 @@ function App() {
       <Route path='/' element={<ProductCard/>} />
         <Route path='/registerhook' element={<Registerhook />} />
         <Route path="/productComponent" element={<ProductComponent />} />
-                
+    
+     
       </Routes>
     </Router>
     </>

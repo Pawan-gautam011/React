@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { CiStar } from "react-icons/ci";
 
@@ -13,7 +13,7 @@ const ProductCard = () => {
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(response => response.json())
-      .then(data => setProducts(data));
+     .then(data => setProducts(data));
   }, []);
 
   const loadMore = () => {

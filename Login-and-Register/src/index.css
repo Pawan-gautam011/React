@@ -5,3 +5,34 @@
 body{
     background-color: rgb(42, 41, 54);
 }
+
+.button{
+    font-size: 20px;
+    border-radius: 12px;
+    border: 1px solid rgb(23, 166, 237);
+    margin: 10px 12px;
+    padding: 10px 12px;
+    cursor: pointer;
+    text-align: center;
+}
+
+div {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+div h1{
+    position: absolute;
+    top: -130%;
+}
+
+hr{
+    position: absolute;
+    height: 1px;
+    width: 100px;
+    top: -30px;
+}

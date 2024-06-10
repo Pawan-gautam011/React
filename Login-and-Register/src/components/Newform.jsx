@@ -32,11 +32,6 @@ const NewForm = () => {
                     </div>
                 )}
             />
-             
-             
-           
-
-
               <Controller
 
 name="Password"

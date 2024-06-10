@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form';
 
+import { useState } from "react"
+
 const Registerhook = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm({
     defaultValues: {
@@ -102,3 +104,4 @@ export default Registerhook;
 // }
 
 // export default Registerhook
+
