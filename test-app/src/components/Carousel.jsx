@@ -3,7 +3,6 @@ import React from 'react'
 const Carousel = () => {
   return (
     <>
-    
     <div id="carouselExample" className="carousel slide">
   <div className="carousel-inner">
     <div className="carousel-item active">
